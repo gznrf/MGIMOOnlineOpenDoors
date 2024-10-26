@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="../styles/mainPageStyle.css" rel="stylesheet"></link>
+    <script src="../scripts/FloorChanging.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
+    <title>MGIMO Online Open Doors</title>
+</head>
+<body>
+    <div class="header_heading">Выбери место и нажми на точку чтобы отправиться туда</div>
+    <div class="content">
+        <div class="content_map_side">
+            <div class="map_image_conteiner">
+                <img src="../images/pictureMaps/picture_map_full_wiew.jpg" class="google_map_image" id="mapPhoto">
+            </div>
+        </div>
+        <div class="content_nav">
+            <div class="content_nav_items">
+                <div class="nav_top_items_container">
+                    <div class="nav_top_top_buttons">
+                        <button class="nav_our_teachers_button nav_top_items" >Наши преподаватели</button>
+                        <div class="nav_drop_list">
+                            <button class="nav_drop_list_title"> Выбрать этаж</button>
+                            <div class="nav_drop_list_items">
+                                <button class="nav_drop_list_item" id="first" onclick="ChangingPhoto(this.id)">1 этаж</button>
+                                <button class="nav_drop_list_item" id="second" onclick="ChangingPhoto(this.id)">2 этаж</button>
+                                <button class="nav_drop_list_item" id="third" onclick="ChangingPhoto(this.id)">3 этаж</button>
+                                <button class="nav_drop_list_item" id="fourth" onclick="ChangingPhoto(this.id)">4 этаж</button>
+                                <button class="nav_drop_list_item" id="fifth" onclick="ChangingPhoto(this.id)">5 этаж</button>
+                                <button class="nav_drop_list_item" id="sixth" onclick="ChangingPhoto(this.id)">6 этаж</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="nav_top_bottom_buttons">
+                        <button class="nav_floors_button nav_top_items" >Этажи</button>
+                        <button class="nav_sections_button nav_top_items" >Секции</button>
+                    </div>
+                </div>
+                
+                <div class="nav_bottom_items_container">
+                    <div class="nav_display_mod_sections">
+                        <div class="display_mod_sections_label">Выберите режим отображения</div>
+                        <button class="display_mod_sections_button">Спутник</button>
+                        <button class="display_mod_sections_button">Рирунок</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

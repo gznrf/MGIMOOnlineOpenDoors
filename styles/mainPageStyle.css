@@ -1,0 +1,205 @@
+body{
+    font-family: "Josefin Sans", sans-serif;
+}
+
+
+
+/*Header*/
+
+.header_heading{
+    font-size: 32px;
+    text-align: center;
+
+    margin-top: 15px;
+    margin-bottom: 5px;
+    width: 95%;
+
+    margin-left: 2.5%;
+    margin-right: 2.5%;
+}
+
+/*Content*/
+.content{
+    display: flex;
+
+    height: 600px;
+    width: 95%;
+
+    margin-left: 2.5%;
+    margin-right: 2.5%;
+
+    border:1px solid #000;
+    border-radius: 2px;
+}
+
+/*Map*/
+.content_map_side{
+    width: 80%;
+
+    display:flex;
+    align-items:center;
+    justify-content: center;
+}
+
+.map_image_conteiner{
+    width: 90%;
+    border:1px solid #000;
+}
+.map_image_conteiner:hover{
+    box-shadow: 0 0 0 0px #fff,
+    0 0 0 2px #000;
+}
+
+.google_map_image{
+    width: 100%;
+}
+/*Nav*/
+.content_nav{
+    display: inline-block;
+    width: 19%;
+
+    align-items: center;
+}
+
+.content_nav_items{
+    height: 90%;
+
+    margin-top: 8%;
+    
+}
+
+
+
+.nav_top_top_buttons{
+    height: 60%;
+}
+.nav_top_bottom_buttons{
+    height: 40%;
+}
+
+
+/*Nav buttons*/
+
+/*Nav top items*/
+
+.nav_top_items_container{
+    height: 80%;
+}
+
+.nav_top_items{
+    font-size: 22px;
+    width: 98%;
+
+    margin: 1%;
+    border: 1px solid black;
+    background: #fff;
+    color: #000;
+    border-radius: 3px;
+    transition: 0.2s;
+}
+
+.nav_top_items:hover{
+    box-shadow: 0 0 0 0px #fff,
+    0 0 0 2px #000;
+}
+
+.nav_our_teachers_button{
+    margin-top: 5%;
+    margin-bottom: 5%;
+
+    height: 50px;
+}
+
+/*Nav drpp list*/
+.nav_drop_list_title {
+    background-color: #fff;
+    color: #000;
+
+    border:1px solid #000;
+    border-radius: 3px;
+
+    font-size: 20px;
+
+    width: 100%;
+}
+
+.nav_drop_list{
+    position: relative;
+    display: inline-block;
+
+    width: 100%;
+
+}
+.nav_drop_list:hover .nav_drop_list_items {display: block;}
+
+
+.nav_drop_list:hover .nav_drop_list_title{
+    box-shadow: 0 0 0 0px #fff,
+    0 0 0 2px #000;
+}
+
+.nav_drop_list_items {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+
+}
+
+.nav_drop_list_item {
+    color: black;
+    background-color: #fff;
+
+    border: 1px black solid;
+    border-radius: 3px;
+    
+    padding: 12px 16px;
+
+    text-decoration: none;
+    display: block;
+    width: 100%;
+}
+
+.nav_drop_list_item:hover{
+    box-shadow: 0 0 0 0px #fff,
+    0 0 0 2px #000;
+}
+
+
+/*Nav bottom items*/
+
+.nav_bottom_items_container{
+    height: 20%;
+
+    text-align: center;
+}
+
+.nav_display_mod_sections{
+    width: 100%;
+    font-size: 22px;
+}
+
+.display_mod_sections_label{
+    margin-bottom: 10px;
+}
+
+.display_mod_sections_button{
+    font-size: 22px;
+    width: 48.5%;
+
+    border: 1px solid black;
+    background: #fff;
+    color: #000;
+    border-radius: 3px;
+    transition: 0.2s;
+    
+}
+
+.display_mod_sections_button:hover{
+    box-shadow: 0 0 0 0px #fff,
+    0 0 0 2px #000;
+}
+
+
