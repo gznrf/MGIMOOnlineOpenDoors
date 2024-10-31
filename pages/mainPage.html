@@ -4,7 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="../styles/mainPageStyle.css" rel="stylesheet"></link>
-    <script src="../scripts/FloorChanging.js"></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r79/three.min.js"></script>
+    <script src="../scripts/DropListScripts.js"></script>
+    <script src="../scripts/PagesTransitions.js"></script>
+    <script src="../scripts/panaramInit.js"></script>
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
@@ -14,30 +19,30 @@
     <div class="header_heading">Выбери место и нажми на точку чтобы отправиться туда</div>
     <div class="content">
         <div class="content_map_side">
-            <div class="map_image_conteiner">
-                <img src="../images/pictureMaps/picture_map_full_wiew.jpg" class="google_map_image" id="mapPhoto">
+            <div class="map_image_conteiner" id="img_container">
+                <!--<img src="../images/pictureMaps/picture_map_full_wiew.jpg" class="google_map_image" id="mapPhoto">-->
             </div>
         </div>
         <div class="content_nav">
             <div class="content_nav_items">
                 <div class="nav_top_items_container">
                     <div class="nav_top_top_buttons">
-                        <button class="nav_our_teachers_button nav_top_items" >Наши преподаватели</button>
+                        <button class="nav_our_teachers_button nav_top_items" onclick="GoToTeachersPage()">Наши преподаватели</button>
                         <div class="nav_drop_list">
-                            <button class="nav_drop_list_title"> Выбрать этаж</button>
+                            <button class="nav_drop_list_title" id="lable">Выбрать этаж</button>
                             <div class="nav_drop_list_items">
-                                <button class="nav_drop_list_item" id="first" onclick="ChangingPhoto(this.id)">1 этаж</button>
-                                <button class="nav_drop_list_item" id="second" onclick="ChangingPhoto(this.id)">2 этаж</button>
-                                <button class="nav_drop_list_item" id="third" onclick="ChangingPhoto(this.id)">3 этаж</button>
-                                <button class="nav_drop_list_item" id="fourth" onclick="ChangingPhoto(this.id)">4 этаж</button>
-                                <button class="nav_drop_list_item" id="fifth" onclick="ChangingPhoto(this.id)">5 этаж</button>
-                                <button class="nav_drop_list_item" id="sixth" onclick="ChangingPhoto(this.id)">6 этаж</button>
+                                <button class="nav_drop_list_item" id="first" onclick="FirstItemSelected()">1 этаж</button>
+                                <button class="nav_drop_list_item" id="second" onclick="SecondItemSelected()">2 этаж</button>
+                                <button class="nav_drop_list_item" id="third" onclick="ThirdItemSelected()">3 этаж</button>
+                                <button class="nav_drop_list_item" id="fourth" onclick="FourthItemSelected()">4 этаж</button>
+                                <button class="nav_drop_list_item" id="fifth" onclick="FifthItemSelected()">5 этаж</button>
+                                <button class="nav_drop_list_item" id="sixth" onclick="SixthItemSelected()">6 этаж</button>
                             </div>
                         </div>
                     </div>
                     <div class="nav_top_bottom_buttons">
-                        <button class="nav_floors_button nav_top_items" >Этажи</button>
-                        <button class="nav_sections_button nav_top_items" >Секции</button>
+                        <button class="nav_floors_button nav_top_items" onclick="ChangePlacesToFloors()">Этажи</button>
+                        <button class="nav_sections_button nav_top_items" onclick="ChangeFloorsToPlaces()">Места</button>
                     </div>
                 </div>
                 
@@ -51,5 +56,85 @@
             </div>
         </div>
     </div>
+    <script>
+        var img = '../images/panarams/a46cb48f-be30-4689-ad16-2ef5a445f75b.jpg ';
+        var container = document.getElementById("img_container");
+        var camera, renderer, scene,
+            mouseDownMouseX, mouseDownMouseY, mouseDownLon, mouseDownLat,
+            lon = 0, lat = 0, phi = 0, theta = 0;
+                
+        init();
+        animate();
+                
+        function init() {
+            var width = $(".map_image_conteiner").width();
+            var height = $(".map_image_conteiner").height();
+            console.log(width, height, 1);
+            camera = new THREE.PerspectiveCamera(75, innerWidth/innerHeight, 1, 1100);
+            camera.target = new THREE.Vector3(0, 0, 0);
+            scene = new THREE.Scene();
+            var geometry = new THREE.SphereBufferGeometry(500, 60, 40);
+
+            geometry.scale(-1, 1, 1 ); 
+            var texture = new THREE.TextureLoader().load(img);
+            var material = new THREE.MeshBasicMaterial({map: texture});
+            scene.add( new THREE.Mesh(geometry, material));
+            renderer = new THREE.WebGLRenderer();
+            renderer.setPixelRatio( window.devicePixelRatio );
+            renderer.setSize(width, height);
+            container.append(renderer.domElement);
+            addEventListener('mousedown', onPointerStart);
+            addEventListener('mousemove', onPointerMove);
+            addEventListener('mouseup', onPointerUp);
+            addEventListener('wheel', onDocumentMouseWheel);
+            addEventListener('resize', onWindowResize);
+            }
+                
+                function onWindowResize() {
+                    camera.aspect = innerWidth / innerHeight;
+                    camera.updateProjectionMatrix();
+                    renderer.setSize( width, height);
+                }
+                
+                function onPointerStart( event ) {
+                    var clientX = event.clientX || event.touches[0].clientX;
+                    var clientY = event.clientY || event.touches[0].clientY;
+                    mouseDownMouseX = clientX;
+                    mouseDownMouseY = clientY;
+                    mouseDownLon = lon;
+                    mouseDownLat = lat;
+                }
+                
+                function onPointerMove( event ) {
+                    if ( !mouseDownMouseX ) return;
+                    var clientX = event.clientX || event.touches[0].clientX;
+                    var clientY = event.clientY || event.touches[0].clientY;
+                    lon = ( mouseDownMouseX - clientX ) * camera.fov/600 + mouseDownLon;
+                    lat = ( clientY - mouseDownMouseY ) * camera.fov/600 + mouseDownLat;
+                }
+                
+                function onPointerUp() {
+                    mouseDownMouseX = null;
+                }
+                
+                function onDocumentMouseWheel( event ) {
+                    var fov = camera.fov + event.deltaY * 0.05;
+                    camera.fov = THREE.Math.clamp(fov, 10, 75);
+                    camera.updateProjectionMatrix();
+                }
+                
+                function animate() {
+                    requestAnimationFrame( animate );
+                    lon += mouseDownMouseX ? 0 : 0.02;
+                    lat = Math.max(-85, Math.min(85, lat));
+                    phi = THREE.Math.degToRad(90 - lat);
+                    theta = THREE.Math.degToRad(lon);
+                    camera.target.x = 0.001 * Math.sin(phi) * Math.cos(theta);
+                    camera.target.y = 0.001 * Math.cos(phi);
+                    camera.target.z = 0.001 * Math.sin(phi) * Math.sin(theta);
+                    camera.lookAt(camera.target);
+                    renderer.render(scene, camera);
+                }
+    </script>
 </body>
 </html>

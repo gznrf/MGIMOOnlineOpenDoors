@@ -8,10 +8,12 @@
     <title>Document</title>
 </head>
 <body>
-    <button class="btn">Hover</button>
+    <button class="btn" onclick="GoToTeachersPage()">Hover</button>
+    <button onclick="ChangeFloorsToPlaces()">Смена на места</button>
+    <button onclick="ChangePlacesToFloors()">Смена на этажи</button>
     <div class="nav_drop_list">
         <button class="nav_drop_list_title"> Выбрать этаж</button>
-        <div class="nav_drop_list_items">
+        <div class="nav_drop_list_items" id="dropList">
             <button class="nav_drop_list_item" id="first" onclick="ChangingPhoto(this.id)">1 этаж</button>
             <button class="nav_drop_list_item" id="second" onclick="ChangingPhoto(this.id)">2 этаж</button>
             <button class="nav_drop_list_item" id="third" onclick="ChangingPhoto(this.id)">3 этаж</button>
